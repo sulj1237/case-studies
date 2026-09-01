@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" width="960" height="340" role="img" aria-label="적립 기준을 전액으로 할 때와 실결제액으로 할 때의 비교">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .h{font-size:13px;font-weight:700;fill:#16181c}
+    .n{font-size:19px;font-weight:600;fill:#16181c;font-variant-numeric:tabular-nums}
+    .k{font-size:10.5px;font-weight:600;fill:#82858d;letter-spacing:.1em}
+    .s{font-size:11.5px;fill:#82858d}
+    .op{font-size:20px;fill:#82858d}
+  </style>
+  <g class="t">
+    <!-- 전액 기준 -->
+    <rect x="0" y="0" width="960" height="150" rx="10" fill="#fdf6ee" stroke="#9a5b1e" stroke-opacity=".3"/>
+    <text x="24" y="30" class="h" fill="#9a5b1e">전액 기준 — 채택하지 않음</text>
+    <g>
+      <text x="24"  y="72" class="k">결제금액</text><text x="24"  y="98" class="n">10,000</text>
+      <text x="150" y="94" class="op">−</text>
+      <text x="186" y="72" class="k">사용 포인트</text><text x="186" y="98" class="n">2,000</text>
+      <text x="322" y="94" class="op">→</text>
+      <text x="360" y="72" class="k">적립 기준</text><text x="360" y="98" class="n" fill="#9a5b1e">10,000</text>
+      <text x="486" y="94" class="op">×</text>
+      <text x="520" y="72" class="k">적립률 5%</text><text x="520" y="98" class="n">= 500P</text>
+    </g>
+    <text x="24" y="128" class="s">쓴 포인트까지 적립 대상이 된다 → 포인트가 포인트를 낳고 원장이 팽창한다.</text>
+    <path d="M700 100 C 780 100 780 62 700 62" fill="none" stroke="#9a5b1e" stroke-opacity=".55" stroke-width="1.5"/>
+    <text x="712" y="86" class="s" fill="#9a5b1e">순환</text>
+
+    <!-- 실결제액 기준 -->
+    <rect x="0" y="176" width="960" height="150" rx="10" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".4"/>
+    <text x="24" y="206" class="h" fill="#0f5c56">실제 결제 잔액 기준 — 채택</text>
+    <g>
+      <text x="24"  y="248" class="k">결제금액</text><text x="24"  y="274" class="n">10,000</text>
+      <text x="150" y="270" class="op">−</text>
+      <text x="186" y="248" class="k">사용 포인트</text><text x="186" y="274" class="n">2,000</text>
+      <text x="322" y="270" class="op">→</text>
+      <text x="360" y="248" class="k">적립 기준</text><text x="360" y="274" class="n" fill="#0f5c56">8,000</text>
+      <text x="486" y="270" class="op">×</text>
+      <text x="520" y="248" class="k">적립률 5%</text><text x="520" y="274" class="n">= 400P</text>
+    </g>
+    <text x="24" y="304" class="s">약국이 실제로 받은 금액만 적립 대상이다. 매출과 적립액이 어긋나지 않는다.</text>
+  </g>
+</svg>

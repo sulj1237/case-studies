@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300" role="img" aria-label="본인인증 결제수단 포인트 사용 확인의 개념 경계">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .k{font-size:10.5px;font-weight:600;letter-spacing:.1em}
+    .l{font-size:15px;font-weight:600;fill:#16181c}
+    .s{font-size:11.5px;fill:#82858d}
+    .bx{fill:#fcfcfa;stroke:#e5e4df}
+  </style>
+  <g class="t">
+    <rect class="bx" x="0" y="0" width="308" height="230" rx="10"/>
+    <text x="24" y="34" class="k" fill="#9a5b1e">아니다</text>
+    <text x="24" y="62" class="l">본인인증</text>
+    <text x="24" y="94" class="s">필요했을 것</text>
+    <text x="24" y="116" class="s">· PASS · 카카오 본인확인</text>
+    <text x="24" y="136" class="s">· CI 연결과 보관 의무</text>
+    <text x="24" y="156" class="s">· 인증 실패 책임</text>
+    <text x="24" y="196" class="s" fill="#9a5b1e">알림톡 수신만으로는</text>
+    <text x="24" y="214" class="s" fill="#9a5b1e">법적 인증이 성립하지 않는다</text>
+
+    <rect class="bx" x="326" y="0" width="308" height="230" rx="10"/>
+    <text x="350" y="34" class="k" fill="#9a5b1e">아니다</text>
+    <text x="350" y="62" class="l">결제수단</text>
+    <text x="350" y="94" class="s">필요했을 것</text>
+    <text x="350" y="116" class="s">· 신규 원장 · 예약 · 보류</text>
+    <text x="350" y="136" class="s">· 상태 전이 관리</text>
+    <text x="350" y="156" class="s">· 정산 책임</text>
+    <text x="350" y="196" class="s" fill="#9a5b1e">차감은 기존 바코드</text>
+    <text x="350" y="214" class="s" fill="#9a5b1e">로직에 위임하면 된다</text>
+
+    <rect x="652" y="0" width="308" height="230" rx="10" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".45"/>
+    <text x="676" y="34" class="k" fill="#0f5c56">이것이다</text>
+    <text x="676" y="62" class="l" fill="#0f5c56">포인트 사용 확인</text>
+    <text x="676" y="94" class="s">필요한 것</text>
+    <text x="676" y="116" class="s">· 등록 휴대전화 소지 확인</text>
+    <text x="676" y="136" class="s">· 유효시간 5분</text>
+    <text x="676" y="156" class="s">· 무작위 토큰</text>
+    <text x="676" y="196" class="s" fill="#0f5c56">신원 증명이 아니라</text>
+    <text x="676" y="214" class="s" fill="#0f5c56">결제 건의 대상자 확인</text>
+
+    <text x="0" y="266" class="s">화면 문구 하나가 법적 성격을 바꾼다. '본인인증 완료'라고 적는 순간 그 책임을 지게 된다.</text>
+    <text x="0" y="288" class="s">그래서 표현 규칙까지 정책 항목으로 올렸다 — 권장 표현은 '포인트 사용 확인' · '포인트 사용 QR'.</text>
+  </g>
+</svg>

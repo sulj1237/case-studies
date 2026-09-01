@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" width="960" height="330" role="img" aria-label="플랫폼 회원 약국 회원 비회원의 관계와 앱 미설치 사각지대">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .k{font-size:10.5px;font-weight:600;letter-spacing:.1em;fill:#82858d}
+    .l{font-size:13px;font-weight:600;fill:#16181c}
+    .s{font-size:11.5px;fill:#82858d}
+    .bx{fill:#f5f4f1;stroke:#e5e4df}
+    .th{font-size:11px;font-weight:600;fill:#82858d;letter-spacing:.08em}
+  </style>
+  <g class="t">
+    <text x="0" y="14" class="k">회원 유형과 가능한 동작</text>
+    <g>
+      <text x="330" y="46" class="th" text-anchor="middle">적립</text>
+      <text x="530" y="46" class="th" text-anchor="middle">사용</text>
+      <text x="760" y="46" class="th" text-anchor="middle">전제 조건</text>
+    </g>
+
+    <rect x="0" y="60" width="960" height="72" rx="8" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".4"/>
+    <text x="20" y="88" class="l">약국 회원 + 앱 설치</text>
+    <text x="20" y="112" class="s">약관 동의 완료 · 고객앱 바코드 제시 가능</text>
+    <text x="330" y="102" class="l" fill="#0f5c56" text-anchor="middle">가능</text>
+    <text x="530" y="102" class="l" fill="#0f5c56" text-anchor="middle">가능</text>
+    <text x="760" y="102" class="s" text-anchor="middle">단골약국 등록 + 바코드 인증</text>
+
+    <rect x="0" y="146" width="960" height="72" rx="8" fill="#fdf6ee" stroke="#9a5b1e" stroke-opacity=".45"/>
+    <text x="20" y="174" class="l">약국 회원 · 앱 미설치</text>
+    <text x="20" y="198" class="s">키오스크에서 전화번호로 가입 — 앱을 깔 이유가 없었다</text>
+    <text x="330" y="188" class="l" fill="#0f5c56" text-anchor="middle">가능</text>
+    <text x="530" y="188" class="l" fill="#9a5b1e" text-anchor="middle">불가</text>
+    <text x="760" y="188" class="s" text-anchor="middle">인증 수단 없음</text>
+
+    <rect class="bx" x="0" y="232" width="960" height="60" rx="8"/>
+    <text x="20" y="258" class="l">비회원</text>
+    <text x="20" y="278" class="s">약국별 약관에 동의하지 않은 상태</text>
+    <text x="330" y="270" class="s" text-anchor="middle">불가 또는 제한</text>
+    <text x="530" y="270" class="s" text-anchor="middle">불가</text>
+    <text x="760" y="270" class="s" text-anchor="middle">키오스크 가입 유도</text>
+
+    <text x="0" y="320" class="s" fill="#9a5b1e">가운데 줄이 D3(앱 바코드 단일 인증)이 만든 사각지대다. 적립은 쌓이는데 쓸 수가 없다.</text>
+  </g>
+</svg>

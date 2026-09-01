@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" width="960" height="430" role="img" aria-label="알림톡 QR 포인트 사용 시퀀스">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .a{font-size:11.5px;font-weight:600;fill:#16181c}
+    .s{font-size:11.5px;fill:#3f4249}
+    .n{font-size:10px;font-weight:600;fill:#0f5c56;font-variant-numeric:tabular-nums}
+    .life{stroke:#e5e4df;stroke-width:1}
+    .arw{stroke:#82858d;stroke-width:1.2;fill:none;marker-end:url(#h)}
+    .arwk{stroke:#0f5c56;stroke-width:1.6;fill:none;marker-end:url(#hk)}
+  </style>
+  <defs>
+    <marker id="h" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L8 4 L0 8 z" fill="#82858d"/></marker>
+    <marker id="hk" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L8 4 L0 8 z" fill="#0f5c56"/></marker>
+  </defs>
+  <g class="t">
+    <!-- lifelines -->
+    <g>
+      <rect x="0"   y="0" width="168" height="34" rx="6" fill="#f5f4f1" stroke="#e5e4df"/>
+      <rect x="198" y="0" width="168" height="34" rx="6" fill="#f5f4f1" stroke="#e5e4df"/>
+      <rect x="396" y="0" width="168" height="34" rx="6" fill="#f5f4f1" stroke="#e5e4df"/>
+      <rect x="594" y="0" width="168" height="34" rx="6" fill="#f5f4f1" stroke="#e5e4df"/>
+      <rect x="792" y="0" width="168" height="34" rx="6" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".4"/>
+      <text x="84"  y="22" class="a" text-anchor="middle">약국 단말</text>
+      <text x="282" y="22" class="a" text-anchor="middle">서버</text>
+      <text x="480" y="22" class="a" text-anchor="middle">알림톡</text>
+      <text x="678" y="22" class="a" text-anchor="middle">고객 모바일 웹</text>
+      <text x="876" y="22" class="a" text-anchor="middle">포인트 원장</text>
+      <g class="life">
+        <line x1="84" y1="34" x2="84" y2="410"/><line x1="282" y1="34" x2="282" y2="410"/>
+        <line x1="480" y1="34" x2="480" y2="410"/><line x1="678" y1="34" x2="678" y2="410"/>
+        <line x1="876" y1="34" x2="876" y2="410"/>
+      </g>
+    </g>
+    <!-- steps -->
+    <text x="90" y="66" class="n">01</text>
+    <path class="arw" d="M84 78 H276"/>
+    <text x="90" y="94" class="s">회원·사용 예정 포인트 확인 → QR 발송 요청</text>
+
+    <text x="288" y="126" class="n">02</text>
+    <path class="arw" d="M282 138 H474"/>
+    <text x="288" y="154" class="s">신규 토큰 발급 · 매핑 (5분 만료)</text>
+
+    <text x="486" y="186" class="n">03</text>
+    <path class="arw" d="M480 198 H672"/>
+    <text x="486" y="214" class="s">'QR 보기' Web Link → 등록 휴대전화</text>
+
+    <text x="288" y="246" class="n">04</text>
+    <path class="arw" d="M672 258 H288"/>
+    <text x="300" y="242" class="s">진입 시 서버가 토큰 검증 후 렌더 — 클라 선판단 없음</text>
+
+    <text x="90" y="298" class="n">05</text>
+    <path class="arw" d="M672 310 H90"/>
+    <text x="100" y="294" class="s">고객이 QR 제시 → 단말이 스캔 (팝업 없이 즉시)</text>
+
+    <text x="288" y="348" class="n">06</text>
+    <path class="arw" d="M84 360 H276"/>
+    <text x="90" y="376" class="s">재검증 — 유효시간 · 토큰 유효 · 허용 POS</text>
+
+    <text x="882" y="392" class="n">07</text>
+    <path class="arwk" d="M282 404 H870"/>
+    <text x="292" y="398" class="s" fill="#0f5c56">기존 앱 바코드와 동일한 차감 로직 · 결제 건 원장 락</text>
+  </g>
+</svg>
