@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" width="960" height="380" role="img" aria-label="다섯 채널이 약국별 독립 원장을 공유하는 구조">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .lbl{font-size:14px;font-weight:600;fill:#16181c}
+    .sub{font-size:11.5px;fill:#82858d}
+    .cap{font-size:11px;font-weight:600;fill:#0f5c56;letter-spacing:.1em}
+    .big{font-size:16px;font-weight:600;fill:#16181c}
+    .bx{fill:#f5f4f1;stroke:#e5e4df}
+    .ln{stroke:#c9c8c2;stroke-width:1}
+  </style>
+  <g class="t">
+    <text x="0" y="14" class="cap">CHANNELS</text>
+    <g>
+      <rect class="bx" x="0"   y="32" width="176" height="66" rx="8"/>
+      <rect class="bx" x="196" y="32" width="176" height="66" rx="8"/>
+      <rect class="bx" x="392" y="32" width="176" height="66" rx="8"/>
+      <rect class="bx" x="588" y="32" width="176" height="66" rx="8"/>
+      <rect class="bx" x="784" y="32" width="176" height="66" rx="8"/>
+      <text x="16"  y="60" class="lbl">고객앱</text><text x="16"  y="80" class="sub">조회 · 바코드 제시</text>
+      <text x="212" y="60" class="lbl">키오스크</text><text x="212" y="80" class="sub">가입 · 약관 동의</text>
+      <text x="408" y="60" class="lbl">POS</text><text x="408" y="80" class="sub">적립 · 사용 · 취소</text>
+      <text x="604" y="60" class="lbl">약국 어드민</text><text x="604" y="80" class="sub">이력 · 수동 조정</text>
+      <text x="800" y="60" class="lbl">슈퍼어드민</text><text x="800" y="80" class="sub">모니터링 · 감사</text>
+    </g>
+    <g class="ln">
+      <path d="M88 98 V126 H480" fill="none"/><path d="M284 98 V126" fill="none"/>
+      <path d="M480 98 V158" fill="none"/><path d="M676 98 V126" fill="none"/>
+      <path d="M872 98 V126 H480" fill="none"/>
+    </g>
+    <text x="0" y="186" class="cap">SHARED LEDGER</text>
+    <rect x="0" y="200" width="960" height="86" rx="8" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".35"/>
+    <text x="24" y="234" class="big">약국별 포인트 원장 — 약국 단위 독립 운영</text>
+    <text x="24" y="260" class="sub">적립 · 사용 · 취소 · 수동조정 · 소멸을 하나의 원장에 기록. 거래번호로 중복 적립을 차단한다.</text>
+    <g>
+      <rect class="bx" x="0"   y="308" width="470" height="56" rx="8"/>
+      <rect class="bx" x="490" y="308" width="470" height="56" rx="8"/>
+      <text x="20"  y="332" class="lbl">약국 A 원장</text><text x="20"  y="352" class="sub">고객 X · 고객 Y · 고객 Z</text>
+      <text x="510" y="332" class="lbl">약국 B 원장</text><text x="510" y="352" class="sub">고객 X · 고객 W</text>
+      <text x="700" y="298" class="sub" text-anchor="middle">같은 고객이라도 약국 간 합산 · 이동 불가</text>
+    </g>
+  </g>
+</svg>

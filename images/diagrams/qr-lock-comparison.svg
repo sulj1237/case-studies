@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-label="토큰 레벨 락과 원장 레벨 락 비교">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .h{font-size:13px;font-weight:700;fill:#16181c;letter-spacing:.06em}
+    .lbl{font-size:12.5px;font-weight:600;fill:#16181c}
+    .sub{font-size:11px;fill:#82858d}
+    .tag{font-size:10.5px;font-weight:600;letter-spacing:.08em}
+    .bx{fill:#fcfcfa;stroke:#e5e4df}
+    .ln{stroke:#c9c8c2;stroke-width:1;fill:none}
+  </style>
+  <g class="t">
+    <!-- 좌: 토큰 레벨 락 -->
+    <rect x="0" y="0" width="455" height="400" rx="10" fill="#fcfcfa" stroke="#e5e4df"/>
+    <text x="24" y="34" class="h">A. 토큰 레벨 락 — 검토 후 폐기</text>
+    <text x="24" y="56" class="sub">최초 1건만 인정하고 나머지 토큰을 즉시 무효화</text>
+    <g>
+      <rect class="bx" x="24" y="80" width="120" height="52" rx="8"/>
+      <text x="38" y="102" class="lbl">QR ①</text><text x="38" y="120" class="tag" fill="#0f5c56">사용완료</text>
+      <rect class="bx" x="166" y="80" width="120" height="52" rx="8"/>
+      <text x="180" y="102" class="lbl">QR ②</text><text x="180" y="120" class="tag" fill="#9a5b1e">무효화</text>
+      <rect class="bx" x="308" y="80" width="120" height="52" rx="8"/>
+      <text x="322" y="102" class="lbl">QR ③</text><text x="322" y="120" class="tag" fill="#9a5b1e">무효화</text>
+    </g>
+    <path class="ln" d="M84 132 V168 H226"/><path class="ln" d="M226 132 V168"/><path class="ln" d="M368 132 V168 H226"/>
+    <rect x="24" y="182" width="404" height="58" rx="8" fill="#f5f4f1" stroke="#e5e4df"/>
+    <text x="40" y="206" class="lbl">포인트 원장</text>
+    <text x="40" y="226" class="sub">잠금이 토큰에 있으므로 원장은 그대로 통과</text>
+    <rect x="24" y="264" width="404" height="112" rx="8" fill="#fdf6ee" stroke="#9a5b1e" stroke-opacity=".3"/>
+    <text x="40" y="290" class="tag" fill="#9a5b1e">문제</text>
+    <text x="40" y="314" class="sub">상태가 사용완료 · 무효화까지 늘어난다.</text>
+    <text x="40" y="334" class="sub">유효 / 만료 2개로 줄인 단순화 모델과 정면 충돌.</text>
+    <text x="40" y="354" class="sub">전이 케이스를 POS · 키오스크 · 모바일 웹에서 각각 처리해야 한다.</text>
+
+    <!-- 우: 원장 레벨 락 -->
+    <rect x="505" y="0" width="455" height="400" rx="10" fill="#fcfcfa" stroke="#0f5c56" stroke-opacity=".4"/>
+    <text x="529" y="34" class="h">B. 원장 레벨 락 — 채택</text>
+    <text x="529" y="56" class="sub">잠금을 토큰이 아니라 결제 건 원장에 건다</text>
+    <g>
+      <rect class="bx" x="529" y="80" width="120" height="52" rx="8"/>
+      <text x="543" y="102" class="lbl">QR ①</text><text x="543" y="120" class="tag" fill="#0f5c56">유효</text>
+      <rect class="bx" x="671" y="80" width="120" height="52" rx="8"/>
+      <text x="685" y="102" class="lbl">QR ②</text><text x="685" y="120" class="tag" fill="#0f5c56">유효</text>
+      <rect class="bx" x="813" y="80" width="120" height="52" rx="8"/>
+      <text x="827" y="102" class="lbl">QR ③</text><text x="827" y="120" class="tag" fill="#0f5c56">유효</text>
+    </g>
+    <path class="ln" d="M589 132 V168 H731"/><path class="ln" d="M731 132 V168"/><path class="ln" d="M873 132 V168 H731"/>
+    <rect x="529" y="182" width="404" height="58" rx="8" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".45"/>
+    <text x="545" y="206" class="lbl">포인트 원장 · 결제 건 단위 락</text>
+    <text x="545" y="226" class="sub">같은 결제 건은 한 번만 차감. 어느 토큰으로 재스캔해도 재차감 없음</text>
+    <rect x="529" y="264" width="404" height="112" rx="8" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".3"/>
+    <text x="545" y="290" class="tag" fill="#0f5c56">결과</text>
+    <text x="545" y="314" class="sub">토큰 상태는 유효 / 만료 2개 그대로.</text>
+    <text x="545" y="334" class="sub">유효시간 내 재사용도 허용된다.</text>
+    <text x="545" y="354" class="sub">중복 차감 방지와 상태 단순화를 함께 만족.</text>
+  </g>
+</svg>
