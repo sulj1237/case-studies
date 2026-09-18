@@ -26,7 +26,7 @@
       <text x="282" y="22" class="a" text-anchor="middle">서버</text>
       <text x="480" y="22" class="a" text-anchor="middle">알림톡</text>
       <text x="678" y="22" class="a" text-anchor="middle">고객 모바일 웹</text>
-      <text x="876" y="22" class="a" text-anchor="middle">포인트 원장</text>
+      <text x="876" y="22" class="a" text-anchor="middle">포인트 기록</text>
       <g class="life">
         <line x1="84" y1="34" x2="84" y2="410"/><line x1="282" y1="34" x2="282" y2="410"/>
         <line x1="480" y1="34" x2="480" y2="410"/><line x1="678" y1="34" x2="678" y2="410"/>
@@ -60,6 +60,6 @@
 
     <text x="882" y="392" class="n">07</text>
     <path class="arwk" d="M282 404 H870"/>
-    <text x="292" y="398" class="s" fill="#0f5c56">기존 앱 바코드와 동일한 차감 로직 · 결제 건 원장 락</text>
+    <text x="292" y="398" class="s" fill="#0f5c56">기존 앱 바코드와 동일한 차감 로직 · 결제 건 기록 잠금</text>
   </g>
 </svg>

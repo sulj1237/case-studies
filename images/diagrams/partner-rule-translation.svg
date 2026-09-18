@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300" role="img" aria-label="법률 요구사항이 서비스 규칙 상태 화면 시스템 기록으로 바뀌는 순서">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .k{font-size:10.5px;font-weight:600;letter-spacing:.1em}
+    .l{font-size:14px;font-weight:600;fill:#16181c}
+    .s{font-size:11.5px;fill:#3f4249}
+    .m{font-size:11.5px;fill:#82858d}
+    .bx{fill:#fcfcfa;stroke:#e5e4df}
+    .on{fill:#e9f1ef;stroke:#0f5c56;stroke-opacity:.45}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#82858d"/></marker>
+  </defs>
+  <g class="t">
+    <rect class="bx" x="0" y="20" width="138" height="150" rx="10"/>
+    <text x="16" y="46" class="k" fill="#82858d">01 LEGAL</text>
+    <text x="16" y="72" class="l">법률 요구</text>
+    <text x="16" y="100" class="s">제3자 제공 동의</text>
+    <text x="16" y="118" class="s">항목 · 목적 ·</text>
+    <text x="16" y="136" class="s">보유기간 고지</text>
+
+    <line x1="142" y1="95" x2="162" y2="95" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="166" y="20" width="138" height="150" rx="10"/>
+    <text x="182" y="46" class="k" fill="#0f5c56">02 RULE</text>
+    <text x="182" y="72" class="l" fill="#0f5c56">서비스 규칙</text>
+    <text x="182" y="100" class="s">경로 → 동의 →</text>
+    <text x="182" y="118" class="s">전달 항목 순서</text>
+    <text x="182" y="136" class="s">고정</text>
+
+    <line x1="308" y1="95" x2="328" y2="95" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="332" y="20" width="138" height="150" rx="10"/>
+    <text x="348" y="46" class="k" fill="#0f5c56">03 STATE</text>
+    <text x="348" y="72" class="l" fill="#0f5c56">상태</text>
+    <text x="348" y="100" class="s">회원 구분 · 자격</text>
+    <text x="348" y="118" class="s">동의 여부 ·</text>
+    <text x="348" y="136" class="s">가입 진행 상태</text>
+
+    <line x1="474" y1="95" x2="494" y2="95" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="498" y="20" width="138" height="150" rx="10"/>
+    <text x="514" y="46" class="k" fill="#0f5c56">04 UI GATE</text>
+    <text x="514" y="72" class="l" fill="#0f5c56">화면 진행 조건</text>
+    <text x="514" y="100" class="s">동의 + 가입 신청</text>
+    <text x="514" y="118" class="s">완료 시 약정</text>
+    <text x="514" y="136" class="s">신청서 제출</text>
+
+    <line x1="640" y1="95" x2="660" y2="95" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="664" y="20" width="138" height="150" rx="10"/>
+    <text x="680" y="46" class="k" fill="#0f5c56">05 DATA</text>
+    <text x="680" y="72" class="l" fill="#0f5c56">전달 조건</text>
+    <text x="680" y="100" class="s">전달 시점에</text>
+    <text x="680" y="118" class="s">동의 상태 확인</text>
+    <text x="680" y="136" class="s">후 정보 전달</text>
+
+    <line x1="806" y1="95" x2="818" y2="95" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="822" y="20" width="138" height="150" rx="10"/>
+    <text x="838" y="46" class="k" fill="#0f5c56">06 LOG</text>
+    <text x="838" y="72" class="l" fill="#0f5c56">동의 기록</text>
+    <text x="838" y="100" class="s">동의 시각</text>
+    <text x="838" y="118" class="s">접속 IP</text>
+    <text x="838" y="136" class="s">동의 항목</text>
+
+    <rect class="bx" x="0" y="200" width="960" height="84" rx="10"/>
+    <text x="20" y="228" class="k" fill="#9a5b1e">체크박스 방식과의 차이</text>
+    <text x="20" y="252" class="s">체크박스는 01 → 04 만 연결한다. 정보가 실제로 넘어가는 순간(05)은 화면 뒤 시스템 처리라서,</text>
+    <text x="20" y="270" class="s">그 시점에 동의 상태를 확인하도록 규칙을 이어야 동의 없는 전달이 실제로 막힌다.</text>
+  </g>
+</svg>

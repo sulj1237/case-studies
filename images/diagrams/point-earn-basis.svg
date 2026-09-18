@@ -20,7 +20,7 @@
       <text x="486" y="94" class="op">×</text>
       <text x="520" y="72" class="k">적립률 5%</text><text x="520" y="98" class="n">= 500P</text>
     </g>
-    <text x="24" y="128" class="s">쓴 포인트까지 적립 대상이 된다 → 포인트가 포인트를 낳고 원장이 팽창한다.</text>
+    <text x="24" y="128" class="s">쓴 포인트까지 적립 대상이 된다 → 포인트가 포인트를 낳아 지급량이 불어난다.</text>
     <path d="M700 100 C 780 100 780 62 700 62" fill="none" stroke="#9a5b1e" stroke-opacity=".55" stroke-width="1.5"/>
     <text x="712" y="86" class="s" fill="#9a5b1e">순환</text>
 

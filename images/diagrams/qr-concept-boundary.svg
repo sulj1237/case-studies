@@ -21,7 +21,7 @@
     <text x="350" y="34" class="k" fill="#9a5b1e">아니다</text>
     <text x="350" y="62" class="l">결제수단</text>
     <text x="350" y="94" class="s">필요했을 것</text>
-    <text x="350" y="116" class="s">· 신규 원장 · 예약 · 보류</text>
+    <text x="350" y="116" class="s">· 신규 기록 구조 · 예약 · 보류</text>
     <text x="350" y="136" class="s">· 상태 전이 관리</text>
     <text x="350" y="156" class="s">· 정산 책임</text>
     <text x="350" y="196" class="s" fill="#9a5b1e">차감은 기존 바코드</text>

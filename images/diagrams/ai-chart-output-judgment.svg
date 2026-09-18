@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-label="처방 데이터에서 AI 정리 결과를 거쳐 약사 판단으로 이어지는 역할 구분">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .k{font-size:10.5px;font-weight:600;letter-spacing:.1em}
+    .l{font-size:15px;font-weight:600;fill:#16181c}
+    .s{font-size:12px;fill:#3f4249}
+    .m{font-size:11.5px;fill:#82858d}
+    .bx{fill:#fcfcfa;stroke:#e5e4df}
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#82858d"/>
+    </marker>
+  </defs>
+  <g class="t">
+    <!-- 1. 입력 데이터 -->
+    <rect class="bx" x="0" y="40" width="250" height="230" rx="10"/>
+    <text x="22" y="70" class="k" fill="#82858d">INPUT · 처방 데이터</text>
+    <text x="22" y="98" class="l">함께 불러오는 기록</text>
+    <text x="22" y="132" class="s">· 현재 처방</text>
+    <text x="22" y="156" class="s">· 이전 처방</text>
+    <text x="22" y="180" class="s">· 같은 의사의 과거 처방</text>
+    <text x="22" y="204" class="s">· 장기 복용 중인 약</text>
+    <text x="22" y="248" class="m">기존에는 약사가 직접 찾아 맞대어 봄</text>
+
+    <line x1="258" y1="155" x2="300" y2="155" stroke="#82858d" stroke-width="1.5" marker-end="url(#ar)"/>
+
+    <!-- 2. AI 정리 -->
+    <rect class="bx" x="308" y="40" width="270" height="230" rx="10"/>
+    <text x="330" y="70" class="k" fill="#82858d">AI OUTPUT · 판단 재료</text>
+    <text x="330" y="98" class="l">변화와 맥락을 정리</text>
+    <text x="330" y="132" class="s">· 무엇이 달라졌나</text>
+    <text x="330" y="156" class="s">· 어떤 맥락의 변화인가</text>
+    <text x="330" y="180" class="s">· 상담 전에 먼저 볼 정보</text>
+    <text x="330" y="204" class="s">· 복용 중인 약 전체 관점</text>
+    <text x="330" y="248" class="m">결론 문장 대신 확인할 순서를 제시</text>
+
+    <!-- 책임 경계 -->
+    <line x1="614" y1="20" x2="614" y2="290" stroke="#9a5b1e" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <text x="614" y="14" class="k" fill="#9a5b1e" text-anchor="middle">책임 경계</text>
+    <line x1="586" y1="155" x2="642" y2="155" stroke="#82858d" stroke-width="1.5" marker-end="url(#ar)"/>
+
+    <!-- 3. 약사 판단 -->
+    <rect x="650" y="40" width="310" height="230" rx="10" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".45"/>
+    <text x="672" y="70" class="k" fill="#0f5c56">HUMAN JUDGMENT · 약사</text>
+    <text x="672" y="98" class="l" fill="#0f5c56">확인 · 판단 · 상담</text>
+    <text x="672" y="132" class="s">· 정리된 변화를 확인</text>
+    <text x="672" y="156" class="s">· 환자 상태를 보고 무엇을 안내할지 결정</text>
+    <text x="672" y="180" class="s">· 복약 상담 진행</text>
+    <text x="672" y="204" class="s">· 최종 판단과 책임은 약사</text>
+    <text x="672" y="248" class="m" fill="#0f5c56">AI 결과는 이 판단을 빠르게 만드는 재료</text>
+
+    <!-- 화면 순서 -->
+    <text x="0" y="322" class="k" fill="#82858d">화면 순서 — 시간 제약을 반영</text>
+    <rect class="bx" x="0" y="334" width="470" height="54" rx="8"/>
+    <text x="20" y="358" class="s" font-weight="600">위 · 기본 약 목록</text>
+    <text x="20" y="376" class="m">즉시 표시 — 상담을 바로 시작</text>
+    <rect class="bx" x="490" y="334" width="470" height="54" rx="8"/>
+    <text x="510" y="358" class="s" font-weight="600">아래 · AI 분석 결과</text>
+    <text x="510" y="376" class="m">필요 시 실행 · 뒤이어 표시 — 응답이 늦어도 기본 업무 진행</text>
+  </g>
+</svg>
