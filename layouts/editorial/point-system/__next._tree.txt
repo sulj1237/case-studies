@@ -1,6 +1,6 @@
 :HL["/case-studies/_next/static/chunks/3b917oiq6-yu8.css","style"]
 :HL["/case-studies/images/diagrams/point-member-types.svg","image"]
-:HL["/case-studies/images/diagrams/point-ledger-channels.svg","image"]
 :HL["/case-studies/images/diagrams/point-earn-basis.svg","image"]
+:HL["/case-studies/images/diagrams/point-ledger-channels.svg","image"]
 :HL["/case-studies/images/diagrams/point-cancel-ledger.svg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"layouts","param":null,"prefetchHints":4192,"slots":{"children":{"name":"variant","param":{"type":"d","key":"editorial","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"point-system","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"feiiHbxuhT7F6uoM5OQlj"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"layouts","param":null,"prefetchHints":4192,"slots":{"children":{"name":"variant","param":{"type":"d","key":"editorial","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"point-system","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"q0MFtP0mAelGBNiyfmg4P"}
