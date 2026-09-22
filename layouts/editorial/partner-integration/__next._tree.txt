@@ -1,4 +1,4 @@
-:HL["/case-studies/_next/static/chunks/1su7652y7evr-.css","style"]
+:HL["/case-studies/_next/static/chunks/2z0l7r2aumzhi.css","style"]
 :HL["/case-studies/images/diagrams/partner-data-flow-gaps.svg","image"]
 :HL["/case-studies/images/diagrams/partner-rule-translation.svg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"layouts","param":null,"prefetchHints":4192,"slots":{"children":{"name":"variant","param":{"type":"d","key":"editorial","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"partner-integration","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"ed7FT5-t7v12GiF_Ysjk4"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"layouts","param":null,"prefetchHints":4192,"slots":{"children":{"name":"variant","param":{"type":"d","key":"editorial","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"partner-integration","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"xU1ZpeIli2KHjAKL18Jul"}
