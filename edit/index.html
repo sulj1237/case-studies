@@ -75,6 +75,14 @@
   .thumb img { width: 100%; height: 120px; object-fit: contain; background: #fff; border-radius: 4px; }
   .thumb span { display: block; font-size: 11px; color: var(--muted); word-break: break-all; margin-top: 4px; }
   .hint { color: var(--muted); font-size: 12px; }
+  .style-panel { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 10px; }
+  .style-panel summary { cursor: pointer; color: var(--accent); font-size: 12px; font-weight: 650; }
+  .style-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+  .style-grid > .row { grid-column: 1 / -1; }
+  .style-grid .field { min-width: 0; }
+  .style-grid input[type=color] { width: 42px; height: 34px; padding: 2px; }
+  .style-grid .row { align-items: end; }
+  @media (max-width: 620px) { .style-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .empty { color: var(--muted); padding: 40px 0; }
   @media (max-width: 800px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } .figure { grid-template-columns: 1fr; } main { padding: 0 16px 80px; } }
 </style>
@@ -82,7 +90,8 @@
 <body>
 <div class="app">
   <aside>
-    <h1>Projects</h1>
+      <h1>Projects</h1>
+    <button id="profileTab" class="proj" type="button">Main Profile<small>profile.json</small></button>
     <div id="projects"></div>
   </aside>
   <main>
@@ -91,6 +100,7 @@
       <span id="status" class="status"></span>
       <span class="spacer"></span>
       <a id="view" target="_blank" rel="noreferrer"><button>사이트에서 보기 ↗</button></a>
+      <button id="restore" title="현재 저장된 값으로 되돌리기" disabled>저장본 불러오기</button>
       <button id="save" class="primary" disabled>저장 (⌘S)</button>
       <button id="publish" hidden disabled>발행</button>
       <button id="logout" class="icon" hidden title="이 브라우저에서 토큰 지우기">⎋</button>
@@ -125,6 +135,8 @@ function createLocalBackend() {
         await api(url, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       }
     },
+    profile: () => api("/api/profile"),
+    saveProfile: (data) => api("/api/profile", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) }),
     async upload(slug, f) {
       return (await api(`/api/projects/${slug}/upload?name=${encodeURIComponent(f.name)}`, { method: "POST", body: f })).src;
     },
@@ -141,24 +153,32 @@ function showImage(img, src) {
 }
 
 /* ───────── 상태 ───────── */
-const S = { siteUrl: "", projects: [], slug: null, data: null, tab: "meta", dirty: new Set(), images: [] };
+const S = { siteUrl: "", projects: [], slug: null, data: null, profile: null, tab: "meta", dirty: new Set(), images: [] };
 
 const LABEL = {
   slug: "슬러그 (주소)", title: "제목", summary: "요약", order: "순서", tier: "묶음", period: "기간", phase: "단계",
+  headline: "메인 문구", eyebrow: "상단 설명", role: "직함", domain: "분야", contact: "연락처", keySkills: "핵심 역량 그룹",
+  group: "그룹 이름", ecosystem: "서비스 구조", tools: "사용 도구", experience: "경험", career: "경력", company: "회사", description: "설명",
   domain: "도메인", keySkill: "Key Skill", team: "팀", role: "역할", ownership: "담당", contribution: "기여",
+  divider: "테두리·구분선 색",
   capability: "역량 한 줄", highlights: "하이라이트", value: "값", label: "라벨", scope: "범위", evidence: "근거",
   sections: "노출 섹션 (순서대로)", status: "상태", hidden: "숨김", relatedTo: "이어진 원래 케이스",
   text: "내용", caption: "설명", items: "항목", note: "메모", id: "번호", alternative: "대안", choice: "선택",
   why: "이유", tradeoff: "포기한 것", steps: "단계", actor: "주체", action: "하는 일", columns: "열 제목",
-  rows: "행", highlight: "강조할 열 (0부터)", q: "질문", a: "답", src: "이미지 경로", alt: "대체 텍스트", size: "크기",
+  rows: "행", highlight: "강조할 열 (0부터)", q: "질문", a: "답", src: "이미지 경로", alt: "대체 텍스트", size: "크기", title: "표 제목",
+  width: "너비 (%)", fontSize: "글자 크기 (px)", fontWeight: "굵기", textAlign: "정렬", background: "배경색", padding: "안쪽 여백 (px)", marginTop: "위쪽 간격 (px)", borderColor: "테두리 색", borderWidth: "테두리 두께 (px)", crop: "이미지 비율·크롭", aspectRatio: "가로세로 비율", fit: "맞춤 방식", position: "이미지 위치",
 };
 const ENUM = {
   status: ["draft", "ready"],
   tier: ["main", "short", "related"],
   size: ["full", "wide", "half", "phone"],
   scope: ["public", "local"],
+  direction: ["vertical", "horizontal"], minHeight: ["compact", "normal", "loose"],
+  fontFamily: ["system", "serif", "mono"], fontWeight: ["400", "500", "600", "700"], textAlign: ["left", "center", "right"],
+  fit: ["contain", "cover"],
+  position: ["center", "top", "bottom"],
 };
-const SIZE_HINT = { full: "가로 캡처 · 본문 폭", wide: "다이어그램 · 넓게", half: "가로 캡처 · 절반", phone: "세로 휴대폰 캡처" };
+  const SIZE_HINT = { full: "가로 캡처 · 본문 폭", wide: "다이어그램 · 넓게", half: "가로 캡처 · 절반", phone: "세로 휴대폰 캡처" };
 const SCOPE_HINT = { public: "공개 사이트에도 노출", local: "로컬에서만 (실서비스 캡처)" };
 
 const TEMPLATES = {
@@ -172,7 +192,7 @@ const TEMPLATES = {
   decision: () => ({ type: "decision", id: "", title: "", alternative: "", choice: "", why: "", tradeoff: "" }),
   flow: () => ({ type: "flow", steps: [{ actor: "", action: "" }], note: "" }),
   compare: () => ({ type: "compare", columns: ["", "", ""], rows: [["", "", ""]] }),
-  table: () => ({ type: "table", columns: ["", ""], rows: [["", ""]] }),
+  table: () => ({ type: "table", title: "", columns: ["", ""], rows: [["", ""]] }),
   cards: () => ({ type: "cards", items: [{ label: "", title: "", text: "" }] }),
   accordion: () => ({ type: "accordion", items: [{ q: "", a: "" }] }),
 };
@@ -283,7 +303,7 @@ function tableEditor(block, rerender) {
 function objectFields(obj, skip = []) {
   const frag = h("div", { class: "fields" });
   for (const key of Object.keys(obj)) {
-    if (key === "type" || skip.includes(key)) continue;
+    if (key === "type" || key === "style" || skip.includes(key)) continue;
     // 표의 열 제목은 행 편집기 첫 줄에서 함께 고친다
     if (key === "columns" && Array.isArray(obj.rows)) continue;
     frag.append(h("div", { class: "field" }, h("label", {}, LABEL[key] ? `${LABEL[key]} · ${key}` : key), valueEditor(obj, key, null)));
@@ -303,6 +323,7 @@ function imageSlot(get, set, rerender, onUpload) {
       h("button", { onclick: () => file.click() }, "올리기"),
       h("button", { onclick: () => pickImage((x) => { set(x); markDirty(); rerender(); }) }, "기존 이미지")),
     h("div", { class: "hint" }, src || "이미지 없음"),
+    src ? h("button", { class: "danger", onclick: () => { set(""); markDirty(); rerender(); } }, "페이지에서 이미지 제거") : null,
     file);
 
   async function upload(f) {
@@ -327,12 +348,15 @@ function figureEditor(block, rerender) {
   for (const [k, d] of Object.entries(defaults)) if (!(k in block)) (block.__defaults ??= {})[k] = block[k] = d;
   const drop = imageSlot(() => block.src, (x) => (block.src = x), rerender,
     (f) => { if (!block.alt) block.alt = f.name.replace(/\.[^.]+$/, ""); });
+  const cropToggle = h("button", { class: "add", onclick: () => { block.crop = block.crop ? undefined : { aspectRatio: "4 / 3", fit: "cover", position: "center" }; markDirty(); rerender(); } }, block.crop ? "크롭 설정 제거" : "비율·크롭 설정 추가");
   return h("div", { class: "fields figure" }, drop, h("div", {},
     h("div", { class: "field" }, h("label", {}, "설명 · caption"), valueEditor(block, "caption")),
     h("div", { class: "field" }, h("label", {}, "대체 텍스트 · alt"), valueEditor(block, "alt")),
     h("div", { class: "row" },
       h("div", { class: "field" }, h("label", {}, "크기 · size"), valueEditor(block, "size")),
-      h("div", { class: "field" }, h("label", {}, "노출 · scope"), valueEditor(block, "scope")))));
+      h("div", { class: "field" }, h("label", {}, "노출 · scope"), valueEditor(block, "scope"))),
+    h("div", { class: "field" }, cropToggle),
+    block.crop ? h("div", { class: "sub" }, objectFields(block.crop)) : null));
 }
 
 /* ───────── 디자인 · 배치 ───────── */
@@ -353,6 +377,10 @@ function colorField(obj, key, fallback) {
     h("button", { title: "기본값으로", onclick: () => { text.value = ""; pick.value = fallback; apply(""); } }, "초기화"));
 }
 const LAYOUTS = [["editorial", "A. Editorial — 왼쪽 라벨 · 오른쪽 본문"], ["rail", "B. Rail — 왼쪽 고정 목차"], ["grid", "C. Grid — 한 열 세로"]];
+function numberField(obj, key, label, min, max, fallback) {
+  const input = h("input", { type: "number", min, max, value: obj[key] ?? fallback, oninput: () => { obj[key] = Math.min(max, Math.max(min, Number(input.value) || min)); markDirty(); } });
+  return h("div", { class: "field" }, h("label", {}, label), input);
+}
 
 function themeEditor(meta) {
   const card = h("div", { class: "card" });
@@ -369,6 +397,13 @@ function themeEditor(meta) {
           h("div", { class: "field" }, h("label", {}, "레이아웃 · layout"), choice(t, "layout", LAYOUTS)),
           h("div", { class: "field" }, h("label", {}, "페이지 배경색 · background"), colorField(t, "background", "#fcfcfa")),
           h("div", { class: "field" }, h("label", {}, "강조색 · accent"), colorField(t, "accent", "#0f5c56")),
+          h("div", { class: "field" }, h("label", {}, "구분선 색 · divider"), colorField(t, "divider", "#e5e4df")),
+          h("div", { class: "row" },
+            numberField(t, "contentWidth", "콘텐츠 최대 너비 · px", 680, 1600, 1200),
+            numberField(t, "pagePadding", "페이지 좌우 여백 · px", 12, 80, 24)),
+          h("div", { class: "row" },
+            numberField(t, "sectionGap", "블록 간격 · px", 12, 96, 32),
+            h("div", { class: "field" }, h("label", {}, "폰트"), choice(t, "fontFamily", [["system", "시스템 고딕"], ["serif", "명조"], ["mono", "고정폭"]]))),
           h("div", { class: "field" }, h("label", {}, `커버 이미지 가림 정도 · coverVeil — ${t.coverVeil ?? 70}%`), (() => {
             const r = h("input", { type: "range", min: 0, max: 95, step: 5, value: t.coverVeil ?? 70, style: "width:100%" });
             r.addEventListener("input", () => { t.coverVeil = Number(r.value); markDirty(); r.parentElement.querySelector("label").textContent = `커버 이미지 가림 정도 · coverVeil — ${r.value}%`; });
@@ -385,7 +420,32 @@ function sectionLayoutEditor(section) {
   return h("div", { class: "row" },
     h("div", { class: "field" }, h("label", {}, "배치 · columns (A안)"), choice(l, "columns", [["split", "나란히 — 왼쪽 제목 · 오른쪽 본문"], ["stack", "위아래 — 제목 아래 본문"]])),
     h("div", { class: "field" }, h("label", {}, "본문 폭 · width"), choice(l, "width", [["normal", "보통"], ["narrow", "좁게 — 읽기 폭"]])),
-    h("div", { class: "field" }, h("label", {}, "위아래 여백 · spacing"), choice(l, "spacing", [["compact", "좁게"], ["normal", "보통"], ["loose", "넓게"]])));
+    h("div", { class: "field" }, h("label", {}, "위아래 여백 · spacing"), choice(l, "spacing", [["compact", "좁게"], ["normal", "보통"], ["loose", "넓게"]])),
+    h("div", { class: "field" }, h("label", {}, "최소 높이 · minHeight"), choice(l, "minHeight", [["compact", "작게"], ["normal", "보통"], ["loose", "크게"]])));
+}
+
+function blockStyleEditor(block) {
+  const current = block.style ?? {};
+  const update = (key, value) => { current[key] = value; block.style = current; markDirty(); };
+  const number = (key, label, min, max, unit) => {
+    const input = h("input", { type: "number", min, max, value: current[key] ?? "", placeholder: "기본값", oninput: () => update(key, input.value === "" ? undefined : Math.min(max, Math.max(min, Number(input.value) || min))) });
+    return h("div", { class: "field" }, h("label", {}, `${label}${unit ? ` · ${unit}` : ""}`), input);
+  };
+  const select = (key, label, values) => {
+    const field = h("select", { onchange: () => update(key, field.value || undefined) },
+      h("option", { value: "" }, "기본값"), values.map(([v, text]) => h("option", { value: v, selected: String(current[key]) === v }, text)));
+    return h("div", { class: "field" }, h("label", {}, label), field);
+  };
+  const colors = h("div", { class: "row" }, ...[["color", "글자 색"], ["background", "배경색"], ["borderColor", "테두리 색"]].map(([key, label]) => {
+    const input = h("input", { type: "color", value: current[key] || "#ffffff", oninput: () => update(key, input.value) });
+    const clear = h("button", { type: "button", title: "기본값", onclick: () => { delete current[key]; markDirty(); input.value = "#ffffff"; } }, "초기화");
+    return h("div", { class: "field" }, h("label", {}, label), h("div", { class: "row" }, input, clear));
+  }));
+  return h("details", { class: "style-panel" }, h("summary", {}, "스타일 · 크기 · 여백 조정"),
+    h("div", { class: "style-grid" }, number("width", "너비", 20, 100, "%"), number("fontSize", "글자 크기", 11, 48, "px"),
+      number("padding", "안쪽 여백", 0, 64, "px"), number("marginTop", "위쪽 간격", 0, 128, "px"),
+      number("borderWidth", "테두리 두께", 1, 8, "px"), select("fontWeight", "굵기", [["400", "보통"], ["500", "중간"], ["600", "굵게"], ["700", "매우 굵게"]]),
+      select("textAlign", "정렬", [["left", "왼쪽"], ["center", "가운데"], ["right", "오른쪽"]]), colors));
 }
 
 async function pickImage(onPick) {
@@ -412,6 +472,12 @@ function blockPreview(b) {
 
 function sectionEditor(section) {
   const box = h("div");
+  if (section.__markdown === true) {
+    box.append(h("div", { class: "card" },
+      h("div", { class: "block-head" }, h("span", { class: "type" }, "MARKDOWN"), h("span", { class: "preview" }, "기존 문서 형식을 유지하면서 내용을 편집합니다")),
+      h("div", { class: "field" }, h("label", {}, "페이지 내용 · Markdown"), textBox(() => section.content, (value) => { section.content = value; }))));
+    return box;
+  }
   const render = () => {
     box.replaceChildren();
     box.append(h("div", { class: "card" }, h("div", { class: "row" },
@@ -428,6 +494,7 @@ function sectionEditor(section) {
         h("button", { class: "icon", title: "아래에 블록 추가", onclick: () => addBlockAt(i + 1) }, "+"),
         ...ctrl(blocks, i, rerender).children));
       card.append(b.type === "figure" ? figureEditor(b, rerender) : objectFields(b));
+      card.append(blockStyleEditor(b));
       box.append(card);
     });
     const typeSel = h("select", {}, Object.keys(TEMPLATES).map((t) => h("option", { value: t }, t)));
@@ -462,7 +529,8 @@ function updateBar() {
   $("#save").disabled = !n;
   const st = $("#status");
   st.className = "status" + (n ? " dirty" : "");
-  st.textContent = n ? `저장 안 됨 (${[...S.dirty].map((t) => (t === "meta" ? "기본 정보" : t)).join(", ")})` : st.dataset.saved || "";
+  st.textContent = n ? `저장 안 됨 (${[...S.dirty].map((t) => (t === "meta" ? "기본 정보" : t === "profile" ? "Main Profile" : t)).join(", ")})` : st.dataset.saved || "";
+  $("#restore").disabled = !S.slug && !S.profile || n === 0;
 }
 function renderProjects() {
   $("#projects").replaceChildren(...S.projects.map((p) =>
@@ -470,6 +538,10 @@ function renderProjects() {
       p.title, p.hidden ? h("span", { class: "badge" }, "숨김") : null, h("small", {}, p.slug))));
 }
 function renderTabs() {
+  if (S.tab === "profile") {
+    $("#tabs").replaceChildren(h("button", { class: "tab active" }, "Main Profile · 홈 콘텐츠"));
+    return;
+  }
   const listed = S.data.meta.sections || [];
   const ids = [...listed, ...Object.keys(S.data.sections).filter((id) => !listed.includes(id))];
   $("#tabs").replaceChildren(
@@ -482,13 +554,31 @@ function renderTabs() {
 function setTab(id) {
   S.tab = id;
   renderTabs();
-  $("#editor").replaceChildren(id === "meta" ? metaEditor(S.data.meta) : sectionEditor(S.data.sections[id]));
-  $("#view").href = `${B.siteUrl}/projects/${S.slug}${B.remote ? "/" : ""}`;
+  if (id === "profile") $("#editor").replaceChildren(profileEditor(S.profile));
+  else $("#editor").replaceChildren(id === "meta" ? metaEditor(S.data.meta) : sectionEditor(S.data.sections[id]));
+  $("#view").href = id === "profile" ? `${B.siteUrl}/` : `${B.siteUrl}/projects/${S.slug}${B.remote ? "/" : ""}`;
   window.scrollTo(0, 0);
+}
+function profileEditor(profile) {
+  const card = h("div", { class: "card" },
+    h("div", { class: "block-head" }, h("span", { class: "type" }, "MAIN PROFILE"), h("span", { class: "preview" }, "홈 화면의 프로필·경력·기술·연락처 데이터")),
+    objectFields(profile));
+  return card;
+}
+async function openProfile() {
+  if (S.dirty.size && !confirm("저장하지 않은 내용이 있습니다. 버리고 프로필을 열까요?")) return;
+  S.dirty.clear(); S.slug = null; S.data = null; S.tab = "profile";
+  S.profile = await B.profile();
+  $("#title").textContent = "Main Profile";
+  $("#status").dataset.saved = "";
+  location.hash = "profile";
+  $("#profileTab").classList.add("active");
+  renderProjects(); setTab("profile"); updateBar();
 }
 async function openProject(slug) {
   if (S.dirty.size && !confirm("저장하지 않은 내용이 있습니다. 버리고 이동할까요?")) return;
-  S.slug = slug; S.dirty.clear(); S.tab = "meta";
+  S.slug = slug; S.profile = null; S.dirty.clear(); S.tab = "meta";
+  $("#profileTab").classList.remove("active");
   S.data = await B.project(slug);
   $("#title").textContent = S.data.meta.title;
   $("#status").dataset.saved = "";
@@ -496,16 +586,30 @@ async function openProject(slug) {
   renderProjects(); setTab("meta"); updateBar();
 }
 
+async function restoreSaved() {
+  if (!confirm("현재 편집값을 버리고 마지막 저장본으로 되돌릴까요?")) return;
+  try {
+    if (S.tab === "profile") S.profile = await B.profile();
+    else {
+      const saved = await B.project(S.slug);
+      if (S.tab === "meta") S.data.meta = saved.meta;
+      else S.data.sections[S.tab] = saved.sections[S.tab];
+    }
+    S.dirty.delete(S.tab); $("#status").dataset.saved = "저장된 값으로 복구했습니다";
+    setTab(S.tab); updateBar();
+  } catch (e) { alert("복구 실패: " + e.message); }
+}
+
 function clean(v) {
   if (Array.isArray(v)) return v.map(clean);
   if (v && typeof v === "object") {
     const out = {};
     for (const [k, x] of Object.entries(v)) {
-      if (k.startsWith("__")) continue;
+      if (k.startsWith("__") && k !== "__markdown") continue;
       if (v.__defaults && k in v.__defaults && x === v.__defaults[k]) continue;
       if (OPTIONAL.has(k) && x === "") continue;
       if (k === "hidden" && x === false) continue;
-      if ((k === "theme" || k === "layout") && x && typeof x === "object" && !Array.isArray(x) && !Object.keys(x).length) continue;
+      if ((k === "theme" || k === "layout" || k === "style") && x && typeof x === "object" && !Array.isArray(x) && !Object.keys(x).length) continue;
       out[k] = clean(x);
     }
     return out;
@@ -516,15 +620,18 @@ async function save() {
   if (!S.dirty.size) return;
   $("#save").disabled = true;
   try {
-    const files = {};
-    for (const id of S.dirty) files[id] = clean(id === "meta" ? S.data.meta : S.data.sections[id]);
-    await B.save(S.slug, files);
+    if (S.dirty.has("profile")) await B.saveProfile(clean(S.profile));
+    else {
+      const files = {};
+      for (const id of S.dirty) files[id] = clean(id === "meta" ? S.data.meta : S.data.sections[id]);
+      await B.save(S.slug, files);
+    }
     S.dirty.clear();
     $("#status").dataset.saved = `저장됨 ${new Date().toLocaleTimeString("ko-KR")} — ` + (B.remote ? "발행하면 공개 사이트에 반영" : "사이트 새로고침하면 반영");
     $("#status").classList.add("saved");
     S.projects = await B.projects();
     refreshPending();
-    $("#title").textContent = S.data.meta.title;
+    $("#title").textContent = S.tab === "profile" ? "Main Profile" : S.data.meta.title;
     renderProjects(); renderTabs();
   } catch (e) { alert("저장 실패: " + e.message); }
   updateBar();
@@ -532,6 +639,8 @@ async function save() {
 }
 
 $("#save").addEventListener("click", save);
+$("#restore").addEventListener("click", restoreSaved);
+$("#profileTab").addEventListener("click", openProfile);
 document.addEventListener("keydown", (e) => { if ((e.metaKey || e.ctrlKey) && e.key === "s") { e.preventDefault(); save(); } });
 window.addEventListener("beforeunload", (e) => { if (S.dirty.size) e.preventDefault(); });
 
@@ -597,7 +706,8 @@ function tokenScreen(message) {
   renderProjects();
   refreshPending();
   const start = location.hash.slice(1);
-  if (S.projects.some((p) => p.slug === start)) openProject(start);
+  if (start === "profile") openProfile();
+  else if (S.projects.some((p) => p.slug === start)) openProject(start);
 })();
 </script>
 </body>

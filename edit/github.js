@@ -114,18 +114,31 @@ export function createGitHubBackend({ token, owner = "sulj1237", repo = "PF_priv
 
     async project(slug) {
       const dir = `content/projects/${slug}/`;
-      const ids = paths.filter((p) => p.startsWith(dir) && p.endsWith(".json") && !p.slice(dir.length).includes("/")).map((p) => p.slice(dir.length, -5)).sort();
+      const ids = [...new Set(paths.filter((p) => p.startsWith(dir) && /\.(json|md)$/.test(p) && !p.slice(dir.length).includes("/")).map((p) => p.slice(dir.length).replace(/\.(json|md)$/, "")))].filter((id) => id !== "_project").sort();
       const sections = {};
-      await Promise.all(ids.filter((id) => id !== "_project").map(async (id) => (sections[id] = await readJson(`${dir}${id}.json`))));
+      await Promise.all(ids.map(async (id) => {
+        if (paths.includes(`${dir}${id}.json`)) sections[id] = await readJson(`${dir}${id}.json`);
+        else sections[id] = { __markdown: true, content: await (await raw(`${dir}${id}.md`)).text() };
+      }));
       return { meta: await readJson(`${dir}_project.json`), sections };
+    },
+
+    async profile() {
+      return readJson("content/profile/profile.json");
+    },
+
+    async saveProfile(data) {
+      const path = "content/profile/profile.json";
+      await commit({ [path]: { content: JSON.stringify(data, null, 2) + (newline[path] ? "\n" : ""), encoding: "utf-8" } }, "edit(profile): 프로필");
     },
 
     /** files: { "meta" | 섹션id: 데이터 } */
     async save(slug, files) {
       const out = {};
       for (const [id, data] of Object.entries(files)) {
-        const path = `content/projects/${slug}/${id === "meta" ? "_project" : id}.json`;
-        out[path] = { content: JSON.stringify(data, null, 2) + (newline[path] ? "\n" : ""), encoding: "utf-8" };
+        const markdown = id !== "meta" && data?.__markdown === true;
+        const path = `content/projects/${slug}/${id === "meta" ? "_project" : id}${markdown ? ".md" : ".json"}`;
+        out[path] = { content: markdown ? data.content : JSON.stringify(data, null, 2) + (newline[path] ? "\n" : ""), encoding: "utf-8" };
       }
       await commit(out, `edit(${slug}): ${Object.keys(files).map((id) => (id === "meta" ? "기본 정보" : id)).join(", ")}`);
     },
