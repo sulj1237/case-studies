@@ -415,6 +415,22 @@ function themeEditor(meta) {
   return card;
 }
 
+/* 소제목 = 스토리 블록의 제목. 오른쪽 위 상황 일러스트를 고른다 (비우면 제목으로 자동) */
+const ILLUSTRATIONS = [
+  ["scan", "바코드 스캔"], ["split", "나눠 관리"], ["track", "이력 추적"], ["roles", "플랫폼 역할"],
+  ["flow", "흐름"], ["rule", "정책 · 기준"], ["exception", "예외 상황"], ["structure", "구조"],
+  ["decision", "판단 · 결정"], ["status", "상태"], ["screen", "화면"], ["verify", "검증"],
+  ["launch", "출시 전 확정"], ["ai", "AI 분석"], ["question", "질문 · 회고"], ["output", "결과 · 변화"],
+  ["next", "다음 단계"], ["cards", "관점 · 탭"], ["none", "없음"],
+];
+function headingEditor(b) {
+  const box = objectFields(b, ["illustration"]);
+  const sel = choice(b, "illustration", ILLUSTRATIONS);
+  sel.firstChild.textContent = "자동 — 제목으로 고름";
+  box.append(h("div", { class: "field" }, h("label", {}, "스토리 일러스트 · illustration"), sel));
+  return box;
+}
+
 function sectionLayoutEditor(section) {
   const l = (section.layout ??= {});
   return h("div", { class: "row" },
@@ -493,7 +509,7 @@ function sectionEditor(section) {
         h("span", { class: "type" }, b.type), h("span", { class: "preview" }, blockPreview(b)),
         h("button", { class: "icon", title: "아래에 블록 추가", onclick: () => addBlockAt(i + 1) }, "+"),
         ...ctrl(blocks, i, rerender).children));
-      card.append(b.type === "figure" ? figureEditor(b, rerender) : objectFields(b));
+      card.append(b.type === "figure" ? figureEditor(b, rerender) : b.type === "heading" ? headingEditor(b) : objectFields(b));
       card.append(blockStyleEditor(b));
       box.append(card);
     });
