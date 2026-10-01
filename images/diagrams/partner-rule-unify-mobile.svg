@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 560" width="340" height="560" role="img" aria-label="기능마다 따로였던 전달 기준을 경로 동의 전달 상태 기록 5단계 공통 규칙으로 통합">
+  <style>
+    .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
+    .k{font-size:12px;font-weight:700;letter-spacing:.08em;fill:#82858d}
+    .l{font-size:16px;font-weight:600;fill:#16181c}
+    .s{font-size:14px;fill:#3f4249}
+    .m{font-size:13px;fill:#82858d}
+    .bx{fill:#f5f4f1;stroke:#e5e4df}
+    .on{fill:#e9f1ef;stroke:#0f5c56;stroke-opacity:.4}
+    .num{font-size:13px;font-weight:700;fill:#fff}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#82858d"/></marker>
+  </defs>
+  <g class="t">
+    <text x="0" y="16" class="k">BEFORE · 기능마다 따로 판단</text>
+    <rect class="bx" x="0" y="30" width="164" height="62" rx="10"/>
+    <text x="14" y="56" class="l">가입</text>
+    <text x="14" y="77" class="m">개별 기준 · 개별 동의</text>
+    <rect class="bx" x="176" y="30" width="164" height="62" rx="10"/>
+    <text x="190" y="56" class="l">로그인</text>
+    <text x="190" y="77" class="m">개별 기준 · 개별 동의</text>
+    <rect class="bx" x="0" y="104" width="164" height="62" rx="10"/>
+    <text x="14" y="130" class="l">주문</text>
+    <text x="14" y="151" class="m">개별 기준 · 개별 동의</text>
+    <rect class="bx" x="176" y="104" width="164" height="62" rx="10"/>
+    <text x="190" y="130" class="l">제휴 가입</text>
+    <text x="190" y="151" class="m">개별 기준 · 개별 동의</text>
+
+    <path d="M170 182V214" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
+    <text x="0" y="244" class="k" fill="#0f5c56">AFTER · 5단계 공통 규칙</text>
+    <rect class="on" x="0" y="258" width="340" height="44" rx="10"/>
+    <circle cx="26" cy="280" r="12" fill="#0f5c56"/>
+    <text x="26" y="285" class="num" text-anchor="middle">1</text>
+    <text x="52" y="286" class="l">경로</text>
+    <line x1="170" y1="303" x2="170" y2="314" stroke="#0f5c56" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="0" y="316" width="340" height="44" rx="10"/>
+    <circle cx="26" cy="338" r="12" fill="#0f5c56"/>
+    <text x="26" y="343" class="num" text-anchor="middle">2</text>
+    <text x="52" y="344" class="l">동의</text>
+    <line x1="170" y1="361" x2="170" y2="372" stroke="#0f5c56" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="0" y="374" width="340" height="44" rx="10"/>
+    <circle cx="26" cy="396" r="12" fill="#0f5c56"/>
+    <text x="26" y="401" class="num" text-anchor="middle">3</text>
+    <text x="52" y="402" class="l">전달</text>
+    <line x1="170" y1="419" x2="170" y2="430" stroke="#0f5c56" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="0" y="432" width="340" height="44" rx="10"/>
+    <circle cx="26" cy="454" r="12" fill="#0f5c56"/>
+    <text x="26" y="459" class="num" text-anchor="middle">4</text>
+    <text x="52" y="460" class="l">상태</text>
+    <line x1="170" y1="477" x2="170" y2="488" stroke="#0f5c56" stroke-width="1.5" marker-end="url(#a)"/>
+    <rect class="on" x="0" y="490" width="340" height="44" rx="10"/>
+    <circle cx="26" cy="512" r="12" fill="#0f5c56"/>
+    <text x="26" y="517" class="num" text-anchor="middle">5</text>
+    <text x="52" y="518" class="l">기록</text>
+  </g>
+</svg>

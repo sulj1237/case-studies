@@ -1,4 +1,3 @@
-:HL["/case-studies/_next/static/chunks/1tu_zgs6rabft.css","style"]
+:HL["/case-studies/_next/static/chunks/1h_677cvmiaea.css","style"]
 :HL["/case-studies/_next/static/chunks/02l01e8j6_z3v.css","style"]
-:HL["/case-studies/images/diagrams/partner-rule-translation.svg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"layouts","param":null,"prefetchHints":4192,"slots":{"children":{"name":"variant","param":{"type":"d","key":"rail","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"partner-integration","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"ci6ztgMqD-USRNIYtIIG_"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"layouts","param":null,"prefetchHints":4192,"slots":{"children":{"name":"variant","param":{"type":"d","key":"rail","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"partner-integration","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"LmRFiVnpDFtsWnDGD5XYg"}
