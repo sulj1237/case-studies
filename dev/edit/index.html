@@ -197,7 +197,7 @@ const TEMPLATES = {
   accordion: () => ({ type: "accordion", items: [{ q: "", a: "" }] }),
 };
 /* 비워 두면 저장할 때 빠지는 선택 항목 */
-const OPTIONAL = new Set(["caption", "note", "alternative", "tradeoff", "relatedTo"]);
+const OPTIONAL = new Set(["caption", "note", "alternative", "tradeoff", "relatedTo", "link", "mobileSrc"]);
 
 /* ───────── 도우미 ───────── */
 const $ = (sel) => document.querySelector(sel);
@@ -356,7 +356,11 @@ function figureEditor(block, rerender) {
       h("div", { class: "field" }, h("label", {}, "크기 · size"), valueEditor(block, "size")),
       h("div", { class: "field" }, h("label", {}, "노출 · scope"), valueEditor(block, "scope"))),
     h("div", { class: "field" }, cropToggle),
-    block.crop ? h("div", { class: "sub" }, objectFields(block.crop)) : null));
+    block.crop ? h("div", { class: "sub" }, objectFields(block.crop)) : null,
+    h("details", { class: "style-panel", open: Boolean(block.mobileSrc) },
+      h("summary", {}, "모바일용 이미지 (선택) — 휴대폰 화면에서 대신 보여줄 세로형"),
+      h("div", { class: "field" }, imageSlot(() => block.mobileSrc, (x) => (block.mobileSrc = x), rerender)),
+      block.mobileSrc ? h("button", { class: "danger", onclick: () => { delete block.mobileSrc; markDirty(); rerender(); } }, "모바일용 이미지 빼기") : null)));
 }
 
 /* ───────── 디자인 · 배치 ───────── */
@@ -399,7 +403,7 @@ function themeEditor(meta) {
           h("div", { class: "field" }, h("label", {}, "강조색 · accent"), colorField(t, "accent", "#0f5c56")),
           h("div", { class: "field" }, h("label", {}, "구분선 색 · divider"), colorField(t, "divider", "#e5e4df")),
           h("div", { class: "row" },
-            numberField(t, "contentWidth", "콘텐츠 최대 너비 · px", 680, 1600, 1200),
+            numberField(t, "contentWidth", "콘텐츠 최대 너비 · px", 680, 1600, 1015),
             numberField(t, "pagePadding", "페이지 좌우 여백 · px", 12, 80, 24)),
           h("div", { class: "row" },
             numberField(t, "sectionGap", "블록 간격 · px", 12, 96, 32),
@@ -496,12 +500,14 @@ function sectionEditor(section) {
   }
   const render = () => {
     box.replaceChildren();
-    box.append(h("div", { class: "card" }, h("div", { class: "row" },
-      h("div", { class: "field" }, h("label", {}, "섹션 제목 · title"), valueEditor(section, "title")),
-      h("div", { class: "field", style: "max-width:160px" }, h("label", {}, "상태 · status"), valueEditor(section, "status"))),
-      sectionLayoutEditor(section)));
     const blocks = (section.blocks ??= []);
+    box.append(stageEditor(section, blocks),
+      h("div", { class: "card" }, h("div", { class: "row" },
+        h("div", { class: "field", style: "max-width:160px" }, h("label", {}, "상태 · status"), valueEditor(section, "status"))),
+        sectionLayoutEditor(section)));
     blocks.forEach((b, i) => {
+      /* 첫 lead 는 위 '단계 요약'에서 고친다 */
+      if (i === 0 && b.type === "lead") return;
       const card = h("div", { class: "card" + (b.__open === false ? " collapsed" : "") });
       const rerender = () => render();
       card.append(h("div", { class: "block-head" },
@@ -527,6 +533,51 @@ function sectionEditor(section) {
   return box;
 }
 
+/* ───────── 단계 머리 ─────────
+ * 섹션 제목 = "단계명 · 명사형 핵심 문구", 첫 lead = 단계 요약(1~2줄). 번호는 노출 순서로 자동. */
+const STAGES = ["INTRO", "PROBLEM", "ANALYSIS", "SOLUTION", "RESULT", "NEXT STEP"];
+function stageEditor(section, blocks) {
+  const raw = (section.title || "").replace(/^\d{1,2}\s+/, "");
+  const at = raw.indexOf(" · ");
+  const parts = { stage: at === -1 ? raw : raw.slice(0, at), headline: at === -1 ? "" : raw.slice(at + 3) };
+  const write = () => { section.title = parts.headline ? `${parts.stage} · ${parts.headline}` : parts.stage; markDirty(); preview.textContent = section.title; };
+  const stageSel = h("select", { onchange: () => { parts.stage = stageSel.value; write(); } },
+    (STAGES.includes(parts.stage) ? STAGES : [parts.stage, ...STAGES]).map((st) => h("option", { value: st, selected: st === parts.stage }, st)));
+  const headline = h("input", { type: "text", value: parts.headline, placeholder: "예: 개인정보 처리 기준의 부재", oninput: () => { parts.headline = headline.value.trim(); write(); } });
+  const lead = blocks[0]?.type === "lead" ? blocks[0] : null;
+  const summary = textBox(() => lead?.text ?? "", (v) => {
+    if (blocks[0]?.type === "lead") blocks[0].text = v;
+    else blocks.unshift({ type: "lead", text: v });
+  });
+  summary.placeholder = "제목 바로 아래 1~2줄 — 이 단계가 무엇을 말하는지";
+  const preview = h("span", { class: "preview" }, section.title || "");
+  return h("div", { class: "card" },
+    h("div", { class: "block-head" }, h("span", { class: "type" }, "단계"), preview),
+    h("div", { class: "row" },
+      h("div", { class: "field", style: "max-width:180px" }, h("label", {}, "단계명"), stageSel),
+      h("div", { class: "field" }, h("label", {}, "핵심 제목 — 명사형 (-다 · -했다 쓰지 않음)"), headline)),
+    h("div", { class: "field" }, h("label", {}, "단계 요약 · 첫 lead"), summary));
+}
+
+/* ───────── 첫 화면 숫자 요약 ───────── */
+function highlightsEditor(meta) {
+  const list = (meta.highlights ??= []);
+  const box = h("div", { class: "card" });
+  const render = () => {
+    box.replaceChildren(
+      h("div", { class: "block-head" }, h("span", { class: "type" }, "숫자 요약"), h("span", { class: "preview" }, "첫 화면 · At a glance — 근거가 있는 값만")),
+      ...list.map((it, i) => h("div", { class: "list-item" },
+        h("div", { class: "grow row" },
+          h("div", { class: "field", style: "max-width:120px" }, h("label", {}, "값"), textBox(() => it.value, (v) => (it.value = v))),
+          h("div", { class: "field" }, h("label", {}, "라벨"), textBox(() => it.label, (v) => (it.label = v))),
+          h("div", { class: "field" }, h("label", {}, "보조 설명 (선택)"), textBox(() => it.note ?? "", (v) => (it.note = v)))),
+        ctrl(list, i, render))),
+      h("button", { class: "add", onclick: () => { list.push({ value: "", label: "", note: "" }); markDirty(); render(); } }, "+ 숫자 추가"));
+  };
+  render();
+  return box;
+}
+
 /* ───────── 기본 정보 ───────── */
 function metaEditor(meta) {
   if (!("hidden" in meta)) meta.hidden = false;
@@ -534,7 +585,8 @@ function metaEditor(meta) {
   wrap.append(themeEditor(meta));
   const box = h("div", { class: "card" });
   wrap.append(box);
-  box.append(objectFields(meta, ["theme"]));
+  wrap.insertBefore(highlightsEditor(meta), box);
+  box.append(objectFields(meta, ["theme", "highlights"]));
   box.append(h("p", { class: "hint" }, "노출 섹션: 위 목록에 있는 섹션만 순서대로 사이트에 나옵니다. 숨김을 켜면 목록·주소·빌드에서 빠집니다."));
   return wrap;
 }
@@ -577,9 +629,47 @@ function setTab(id) {
 }
 function profileEditor(profile) {
   const card = h("div", { class: "card" },
-    h("div", { class: "block-head" }, h("span", { class: "type" }, "MAIN PROFILE"), h("span", { class: "preview" }, "홈 화면의 프로필·경력·기술·연락처 데이터")),
-    objectFields(profile));
-  return card;
+    h("div", { class: "block-head" }, h("span", { class: "type" }, "MAIN PROFILE"), h("span", { class: "preview" }, "홈 화면의 프로필·기술·연락처 데이터")),
+    objectFields(profile, ["career"]));
+  return h("div", {}, careerEditor(profile), card);
+}
+
+/* 경력 — 케이스가 있는 회사는 누르면 해당 프로젝트를 강조, 없는 회사는 외부 링크로 연다 */
+function careerEditor(profile) {
+  const list = (profile.career ??= []);
+  const box = h("div", { class: "card" });
+  const render = () => {
+    const slugs = S.projects.filter((p) => !p.hidden);
+    box.replaceChildren(
+      h("div", { class: "block-head" }, h("span", { class: "type" }, "경력"), h("span", { class: "preview" }, "홈에서 회사를 누르면 → 프로젝트 강조 또는 링크 열기")),
+      ...list.map((c, i) => {
+        const picks = h("div", { class: "row", style: "flex-wrap:wrap" }, ...slugs.map((p) => {
+          const cb = h("input", { type: "checkbox", checked: (c.projects ?? []).includes(p.slug), onchange: () => {
+            const set = new Set(c.projects ?? []);
+            cb.checked ? set.add(p.slug) : set.delete(p.slug);
+            c.projects = slugs.map((x) => x.slug).filter((x) => set.has(x));
+            if (!c.projects.length) delete c.projects;
+            markDirty();
+          } });
+          return h("label", { style: "flex:0 0 auto;display:flex;gap:4px;align-items:center" }, cb, p.title);
+        }));
+        return h("div", { class: "list-item" },
+          h("div", { class: "grow sub" },
+            h("div", { class: "row" },
+              h("div", { class: "field" }, h("label", {}, "회사"), textBox(() => c.company, (v) => (c.company = v))),
+              h("div", { class: "field" }, h("label", {}, "기간"), textBox(() => c.period, (v) => (c.period = v)))),
+            h("div", { class: "field" }, h("label", {}, "역할"), textBox(() => c.role, (v) => (c.role = v))),
+            h("div", { class: "field" }, h("label", {}, "설명"), textBox(() => c.description ?? "", (v) => (c.description = v))),
+            h("div", { class: "field" }, h("label", {}, "강조할 프로젝트 — 이 회사에서 한 케이스"), picks),
+            h("div", { class: "field" }, h("label", {}, "외부 링크 — 케이스가 없을 때 (Drive · Notion 등)"),
+              textBox(() => c.link ?? "", (v) => (c.link = v.trim())))),
+          ctrl(list, i, render));
+      }),
+      h("button", { class: "add", onclick: () => { list.push({ period: "", company: "", role: "", description: "", link: "" }); markDirty(); render(); } }, "+ 경력 추가"),
+      h("p", { class: "hint" }, "프로젝트를 고르면 링크보다 우선합니다. 링크는 보는 사람 누구나 열 수 있게 공유 설정을 확인하세요."));
+  };
+  render();
+  return box;
 }
 async function openProfile() {
   if (S.dirty.size && !confirm("저장하지 않은 내용이 있습니다. 버리고 프로필을 열까요?")) return;
