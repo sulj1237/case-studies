@@ -1,53 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" width="960" height="360" role="img" aria-label="결제 취소 시 포인트 기록 처리와 예외 분기">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 442" width="680" height="442" role="img" aria-label="결제 취소 시 포인트 기록 처리와 예외 분기">
+  <!-- 680px 폭에서 1:1 로 보이도록 그렸다. 글자 크기는 본문 정책과 같다: 라벨 16 · 본문 14 · 보조 13 · 머리말 12 -->
   <style>
     .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
-    .h{font-size:12.5px;font-weight:700;fill:#16181c}
-    .k{font-size:10.5px;font-weight:600;fill:#82858d;letter-spacing:.1em}
-    .l{font-size:13px;font-weight:600;fill:#16181c}
-    .s{font-size:11.5px;fill:#82858d}
+    .k{font-size:12px;font-weight:700;letter-spacing:.08em;fill:#82858d}
+    .l{font-size:16px;font-weight:600;fill:#16181c}
+    .h{font-size:15px;font-weight:700;fill:#16181c}
+    .s{font-size:14px;fill:#3f4249}
+    .m{font-size:13px;fill:#82858d}
+    .w{font-size:13px;font-weight:600;fill:#9a5b1e}
+    .n{font-size:20px;font-weight:600;fill:#16181c;font-variant-numeric:tabular-nums}
+    .op{font-size:20px;fill:#82858d}
     .bx{fill:#f5f4f1;stroke:#e5e4df}
+    .on{fill:#e9f1ef;stroke:#0f5c56;stroke-opacity:.4}
+    .gap{fill:#fbf3ea;stroke:#9a5b1e;stroke-opacity:.5}
+    .wr{fill:#fdf6ee;stroke:#9a5b1e;stroke-opacity:.4}
+    .ln{stroke:#b9b8b2;stroke-width:1.2;fill:none}
   </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#82858d"/></marker>
+  </defs>
   <g class="t">
-    <text x="0" y="14" class="k">원거래</text>
-    <rect class="bx" x="0" y="28" width="300" height="92" rx="8"/>
-    <text x="20" y="56" class="l">결제 8,000 + 포인트 2,000</text>
-    <text x="20" y="80" class="s">적립 400P 지급됨</text>
-    <text x="20" y="102" class="s">거래번호로 식별</text>
+    <text x="0" y="16" class="k">원거래</text>
+    <rect class="bx" x="0" y="30" width="250" height="140" rx="10"/>
+    <text x="18" y="62" class="l">결제 8,000</text>
+    <text x="18" y="84" class="l">+ 포인트 2,000</text>
+    <text x="18" y="116" class="s">적립 400P 지급됨</text>
+    <text x="18" y="140" class="s">거래번호로 식별</text>
 
-    <path d="M300 74 H392" stroke="#c9c8c2" stroke-width="1"/>
-    <text x="316" y="66" class="s">전체 취소</text>
+    <path class="ln" d="M250 100H322M322 100V61H344M322 100V139H344"/>
+    <text x="286" y="92" class="m" text-anchor="middle">전체 취소</text>
 
-    <rect x="392" y="14" width="290" height="56" rx="8" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".4"/>
-    <text x="412" y="40" class="l" fill="#0f5c56">사용 포인트 2,000 복구</text>
-    <text x="412" y="58" class="s">고객 잔액으로 되돌린다</text>
+    <rect class="on" x="344" y="30" width="336" height="62" rx="8"/>
+    <text x="362" y="56" class="l" fill="#0f5c56">사용 포인트 2,000 복구</text>
+    <text x="362" y="78" class="s">고객 잔액으로 되돌린다</text>
+    <rect class="wr" x="344" y="108" width="336" height="62" rx="8"/>
+    <text x="362" y="134" class="l" fill="#9a5b1e">적립 포인트 400 회수</text>
+    <text x="362" y="156" class="s">지급분을 되가져온다</text>
 
-    <rect x="392" y="82" width="290" height="56" rx="8" fill="#fdf6ee" stroke="#9a5b1e" stroke-opacity=".35"/>
-    <text x="412" y="108" class="l" fill="#9a5b1e">적립 포인트 400 회수</text>
-    <text x="412" y="126" class="s">지급분을 되가져온다</text>
+    <text x="0" y="214" class="k">정상 처리되지 않는 경우</text>
+    <rect class="bx" x="0" y="228" width="216" height="150" rx="10"/>
+    <text x="16" y="258" class="h">복구 대상이 이미 만료</text>
+    <text x="16" y="286" class="s">만료는 시간 기준으로</text>
+    <text x="16" y="306" class="s">이미 확정된 상태다.</text>
+    <text x="16" y="362" class="w">→ 복원되지 않을 수 있음</text>
+    <rect class="bx" x="232" y="228" width="216" height="150" rx="10"/>
+    <text x="248" y="258" class="h">회수할 잔액이 부족</text>
+    <text x="248" y="286" class="s">이미 다른 곳에 써버린 경우</text>
+    <text x="248" y="306" class="s">잔액을 음수로 두지 않는다.</text>
+    <text x="248" y="362" class="w">→ 자동 조정 포인트로 표기</text>
+    <rect class="bx" x="464" y="228" width="216" height="150" rx="10"/>
+    <text x="480" y="258" class="h">부분 환불 요청</text>
+    <text x="480" y="286" class="s">라운딩 규칙 · 차감</text>
+    <text x="480" y="306" class="s">우선순위가 확정돼야</text>
+    <text x="480" y="326" class="s">성립한다.</text>
+    <text x="480" y="362" class="w">→ 전체 취소 후 재결제</text>
 
-    <path d="M300 74 V42 H392" fill="none" stroke="#c9c8c2" stroke-width="1"/>
-    <path d="M300 74 V110 H392" fill="none" stroke="#c9c8c2" stroke-width="1"/>
-
-    <text x="0" y="176" class="k">정상 처리되지 않는 경우</text>
-    <g>
-      <rect class="bx" x="0"   y="192" width="308" height="106" rx="8"/>
-      <rect class="bx" x="326" y="192" width="308" height="106" rx="8"/>
-      <rect class="bx" x="652" y="192" width="308" height="106" rx="8"/>
-      <text x="20"  y="220" class="h">복구 대상이 이미 만료</text>
-      <text x="20"  y="246" class="s">만료는 시간 기준으로 이미</text>
-      <text x="20"  y="264" class="s">확정된 상태다.</text>
-      <text x="20"  y="286" class="s" fill="#9a5b1e">→ 복원되지 않을 수 있음</text>
-
-      <text x="346" y="220" class="h">회수할 잔액이 부족</text>
-      <text x="346" y="246" class="s">이미 다른 곳에 써버린 경우</text>
-      <text x="346" y="264" class="s">잔액을 음수로 두지 않는다.</text>
-      <text x="346" y="286" class="s" fill="#9a5b1e">→ 자동 조정 포인트로 표기</text>
-
-      <text x="672" y="220" class="h">부분 환불 요청</text>
-      <text x="672" y="246" class="s">라운딩 규칙·차감 우선순위가</text>
-      <text x="672" y="264" class="s">확정돼야 성립한다.</text>
-      <text x="672" y="286" class="s" fill="#9a5b1e">→ 전체 취소 후 재결제</text>
-    </g>
-    <text x="0" y="336" class="s">마이너스 잔액은 실제 부채로 관리하지 않는다 — 플랫폼은 시스템 제공자이며 부채 주체가 아니다.</text>
+    <text x="0" y="410" class="s">마이너스 잔액은 실제 부채로 관리하지 않는다 —</text>
+    <text x="0" y="432" class="s">플랫폼은 시스템 제공자이며 부채 주체가 아니다.</text>
   </g>
 </svg>

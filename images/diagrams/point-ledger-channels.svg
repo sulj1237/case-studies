@@ -1,42 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" width="960" height="380" role="img" aria-label="다섯 채널이 약국별 독립 포인트 기록을 공유하는 구조">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 414" width="680" height="414" role="img" aria-label="다섯 채널이 약국별 독립 포인트 기록을 공유하는 구조">
+  <!-- 680px 폭에서 1:1 로 보이도록 그렸다. 글자 크기는 본문 정책과 같다: 라벨 16 · 본문 14 · 보조 13 · 머리말 12 -->
   <style>
     .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
-    .lbl{font-size:14px;font-weight:600;fill:#16181c}
-    .sub{font-size:11.5px;fill:#82858d}
-    .cap{font-size:11px;font-weight:600;fill:#0f5c56;letter-spacing:.1em}
-    .big{font-size:16px;font-weight:600;fill:#16181c}
+    .k{font-size:12px;font-weight:700;letter-spacing:.08em;fill:#82858d}
+    .l{font-size:16px;font-weight:600;fill:#16181c}
+    .h{font-size:15px;font-weight:700;fill:#16181c}
+    .s{font-size:14px;fill:#3f4249}
+    .m{font-size:13px;fill:#82858d}
+    .w{font-size:13px;font-weight:600;fill:#9a5b1e}
+    .n{font-size:20px;font-weight:600;fill:#16181c;font-variant-numeric:tabular-nums}
+    .op{font-size:20px;fill:#82858d}
     .bx{fill:#f5f4f1;stroke:#e5e4df}
-    .ln{stroke:#c9c8c2;stroke-width:1}
+    .on{fill:#e9f1ef;stroke:#0f5c56;stroke-opacity:.4}
+    .gap{fill:#fbf3ea;stroke:#9a5b1e;stroke-opacity:.5}
+    .wr{fill:#fdf6ee;stroke:#9a5b1e;stroke-opacity:.4}
+    .ln{stroke:#b9b8b2;stroke-width:1.2;fill:none}
   </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#82858d"/></marker>
+  </defs>
   <g class="t">
-    <text x="0" y="14" class="cap">CHANNELS</text>
-    <g>
-      <rect class="bx" x="0"   y="32" width="176" height="66" rx="8"/>
-      <rect class="bx" x="196" y="32" width="176" height="66" rx="8"/>
-      <rect class="bx" x="392" y="32" width="176" height="66" rx="8"/>
-      <rect class="bx" x="588" y="32" width="176" height="66" rx="8"/>
-      <rect class="bx" x="784" y="32" width="176" height="66" rx="8"/>
-      <text x="16"  y="60" class="lbl">고객앱</text><text x="16"  y="80" class="sub">조회 · 바코드 제시</text>
-      <text x="212" y="60" class="lbl">키오스크</text><text x="212" y="80" class="sub">가입 · 약관 동의</text>
-      <text x="408" y="60" class="lbl">POS</text><text x="408" y="80" class="sub">적립 · 사용 · 취소</text>
-      <text x="604" y="60" class="lbl">약국 관리자</text><text x="604" y="80" class="sub">이력 · 수동 조정</text>
-      <text x="800" y="60" class="lbl">본사 관리자</text><text x="800" y="80" class="sub">조회 · 표준 양식</text>
-    </g>
-    <g class="ln">
-      <path d="M88 98 V126 H480" fill="none"/><path d="M284 98 V126" fill="none"/>
-      <path d="M480 98 V158" fill="none"/><path d="M676 98 V126" fill="none"/>
-      <path d="M872 98 V126 H480" fill="none"/>
-    </g>
-    <text x="0" y="186" class="cap">SHARED LEDGER</text>
-    <rect x="0" y="200" width="960" height="86" rx="8" fill="#e9f1ef" stroke="#0f5c56" stroke-opacity=".35"/>
-    <text x="24" y="234" class="big">약국별 포인트 기록 — 약국 단위 독립 운영</text>
-    <text x="24" y="260" class="sub">적립 · 사용 · 취소 · 수동조정 · 소멸을 하나의 포인트 기록에 저장. 거래번호로 중복 적립을 차단한다.</text>
-    <g>
-      <rect class="bx" x="0"   y="308" width="470" height="56" rx="8"/>
-      <rect class="bx" x="490" y="308" width="470" height="56" rx="8"/>
-      <text x="20"  y="332" class="lbl">약국 A 기록</text><text x="20"  y="352" class="sub">고객 X · 고객 Y · 고객 Z</text>
-      <text x="510" y="332" class="lbl">약국 B 기록</text><text x="510" y="352" class="sub">고객 X · 고객 W</text>
-      <text x="700" y="298" class="sub" text-anchor="middle">같은 고객이라도 약국 간 합산 · 이동 불가</text>
-    </g>
+    <text x="0" y="16" class="k" fill="#0f5c56">CHANNELS</text>
+    <rect class="bx" x="0" y="30" width="124" height="86" rx="8"/>
+    <text x="14" y="58" class="l">고객앱</text>
+    <text x="14" y="82" class="m">조회 ·</text>
+    <text x="14" y="100" class="m">바코드 제시</text>
+    <rect class="bx" x="139" y="30" width="124" height="86" rx="8"/>
+    <text x="153" y="58" class="l">키오스크</text>
+    <text x="153" y="82" class="m">가입 ·</text>
+    <text x="153" y="100" class="m">약관 동의</text>
+    <rect class="bx" x="278" y="30" width="124" height="86" rx="8"/>
+    <text x="292" y="58" class="l">POS</text>
+    <text x="292" y="82" class="m">적립 · 사용 ·</text>
+    <text x="292" y="100" class="m">취소</text>
+    <rect class="bx" x="417" y="30" width="124" height="86" rx="8"/>
+    <text x="431" y="58" class="l">약국 관리자</text>
+    <text x="431" y="82" class="m">이력 ·</text>
+    <text x="431" y="100" class="m">수동 조정</text>
+    <rect class="bx" x="556" y="30" width="124" height="86" rx="8"/>
+    <text x="570" y="58" class="l">본사 관리자</text>
+    <text x="570" y="82" class="m">조회 ·</text>
+    <text x="570" y="100" class="m">표준 양식</text>
+    <path class="ln" d="M62 116V144H618V116M201 116V144M479 116V144M340 116V190"/>
+    <text x="0" y="178" class="k" fill="#0f5c56">SHARED LEDGER</text>
+    <rect class="on" x="0" y="190" width="680" height="104" rx="10"/>
+    <text x="20" y="224" class="l">약국별 포인트 기록 — 약국 단위 독립 운영</text>
+    <text x="20" y="252" class="s">적립 · 사용 · 취소 · 수동조정 · 소멸을 하나의 포인트 기록에 저장.</text>
+    <text x="20" y="274" class="s">거래번호로 중복 적립을 차단한다.</text>
+
+    <rect class="bx" x="0" y="310" width="332" height="66" rx="8"/>
+    <rect class="bx" x="348" y="310" width="332" height="66" rx="8"/>
+    <text x="18" y="338" class="l">약국 A 기록</text><text x="18" y="362" class="s">고객 X · 고객 Y · 고객 Z</text>
+    <text x="366" y="338" class="l">약국 B 기록</text><text x="366" y="362" class="s">고객 X · 고객 W</text>
+    <text x="0" y="404" class="m">같은 고객이라도 약국 간 합산 · 이동 불가</text>
   </g>
 </svg>
