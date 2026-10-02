@@ -1,62 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" width="680" height="420" role="img" aria-label="파트너몰과 약국 플랫폼 사이를 오가던 정보와 개인정보 처리 공백 네 곳">
-  <!-- 680px 폭에서 1:1 로 보이도록 그렸다. 글자 크기는 본문 정책과 같다: 라벨 16 · 본문 14 · 보조 13 · 머리말 12 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" role="img" aria-label="파트너몰에서 약국 플랫폼으로 이어지는 가입·회원 연동과 약국 플랫폼에서 파트너몰로 이어지는 주문 흐름">
+  <!-- 680px 폭에서 1:1. 글자 크기는 본문 정책과 같다: 라벨 16 · 본문 14 · 보조 13 · 머리말 12 -->
   <style>
     .t{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif}
     .k{font-size:12px;font-weight:700;letter-spacing:.08em;fill:#82858d}
     .l{font-size:16px;font-weight:600;fill:#16181c}
-    .h{font-size:15px;font-weight:700;fill:#16181c}
     .s{font-size:14px;fill:#3f4249}
     .m{font-size:13px;fill:#82858d}
-    .w{font-size:13px;font-weight:600;fill:#9a5b1e}
-    .n{font-size:20px;font-weight:600;fill:#16181c;font-variant-numeric:tabular-nums}
-    .op{font-size:20px;fill:#82858d}
     .bx{fill:#f5f4f1;stroke:#e5e4df}
     .on{fill:#e9f1ef;stroke:#0f5c56;stroke-opacity:.4}
-    .gap{fill:#fbf3ea;stroke:#9a5b1e;stroke-opacity:.5}
-    .wr{fill:#fdf6ee;stroke:#9a5b1e;stroke-opacity:.4}
-    .ln{stroke:#b9b8b2;stroke-width:1.2;fill:none}
   </style>
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#82858d"/></marker>
   </defs>
   <g class="t">
-    <rect class="bx" x="0" y="0" width="156" height="300" rx="10"/>
-    <text x="16" y="30" class="k">PARTNER MALL</text>
-    <text x="16" y="58" class="l">파트너몰</text>
-    <text x="16" y="88" class="m">제휴사가 운영하는</text>
-    <text x="16" y="106" class="m">약국 대상</text>
-    <text x="16" y="124" class="m">주문 채널</text>
+    <rect class="bx" x="0" y="0" width="166" height="200" rx="12"/>
+    <text x="18" y="32" class="k">PARTNER MALL</text>
+    <text x="18" y="62" class="l">파트너몰</text>
+    <text x="18" y="90" class="s">회원 약정 ·</text>
+    <text x="18" y="110" class="s">상품 주문</text>
 
-    <rect class="bx" x="524" y="0" width="156" height="300" rx="10"/>
-    <text x="540" y="30" class="k">PHARMACY</text>
-    <text x="540" y="46" class="k">PLATFORM</text>
-    <text x="540" y="74" class="l">약국 플랫폼</text>
-    <text x="540" y="104" class="m">약국 업무 프로그램 ·</text>
-    <text x="540" y="122" class="m">재고 관리 · 가입</text>
+    <rect class="on" x="514" y="0" width="166" height="200" rx="12"/>
+    <text x="530" y="32" class="k" fill="#0f5c56">PHARMACY</text>
+    <text x="530" y="62" class="l">약국 플랫폼</text>
+    <text x="530" y="90" class="s">회원 연동 ·</text>
+    <text x="530" y="110" class="s">재고관리</text>
 
-    <line x1="162" y1="50" x2="518" y2="50" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
-    <rect class="gap" x="176" y="22" width="328" height="56" rx="8"/>
-    <text x="190" y="45" class="s">① 약국 · 회원정보 → 가입</text>
-    <text x="190" y="65" class="w">개인정보 제공 동의 없이 전달되는 구간</text>
+    <line x1="172" y1="64" x2="508" y2="64" stroke="#82858d" stroke-width="1.6" marker-end="url(#a)"/>
+    <rect class="bx" x="184" y="42" width="312" height="44" rx="8"/>
+    <text x="340" y="69" class="s" text-anchor="middle">파트너몰 → 약국 플랫폼 가입·회원 연동</text>
 
-    <line x1="162" y1="120" x2="518" y2="120" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
-    <rect class="gap" x="176" y="92" width="328" height="56" rx="8"/>
-    <text x="190" y="115" class="s">② 파트너몰 회원정보 → 플랫폼 가입 신청</text>
-    <text x="190" y="135" class="w">가입 경로별 회원 처리 기준 미정의</text>
+    <line x1="508" y1="140" x2="172" y2="140" stroke="#82858d" stroke-width="1.6" marker-end="url(#a)"/>
+    <rect class="bx" x="184" y="118" width="312" height="44" rx="8"/>
+    <text x="340" y="145" class="s" text-anchor="middle">약국 플랫폼 → 파트너몰 상품 주문</text>
 
-    <line x1="518" y1="190" x2="162" y2="190" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
-    <rect class="gap" x="176" y="162" width="328" height="56" rx="8"/>
-    <text x="190" y="185" class="s">③ 로그인 연동정보 → 파트너몰</text>
-    <text x="190" y="205" class="w">수집 · 제3자 제공 기준 불명확</text>
-
-    <line x1="518" y1="260" x2="162" y2="260" stroke="#82858d" stroke-width="1.5" marker-end="url(#a)"/>
-    <rect class="gap" x="176" y="232" width="328" height="56" rx="8"/>
-    <text x="190" y="255" class="s">④ 약국 식별 · 상품 · 수량 → 주문</text>
-    <text x="190" y="275" class="w">주문정보 전달 동의 · 고지 부족</text>
-
-    <text x="0" y="338" class="s" font-weight="600">흐름은 이미 작동하고 있었다.</text>
-    <text x="0" y="360" class="s" font-weight="600">비어 있던 것은 각 화살표에 붙어야 할 조건이다.</text>
-    <text x="0" y="390" class="m">가입 · 주문 경로는 유지하고, 네 곳 모두에</text>
-    <text x="0" y="410" class="m">경로 → 동의 → 전달 항목 → 상태 → 기록 규칙을 붙였다.</text>
+    <text x="0" y="240" class="s" font-weight="600">기존 회원·주문 흐름을 유지하며,</text>
+    <text x="0" y="262" class="s" font-weight="600">가입·약정·주문에서 정보가 전달되는 조건을 정의한다.</text>
+    <text x="0" y="290" class="m">회원가입·약정·주문 과정의 개인정보와 회원 정보 전달 기준을 다룬 프로젝트</text>
   </g>
 </svg>
