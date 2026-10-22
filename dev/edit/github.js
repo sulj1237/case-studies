@@ -88,7 +88,8 @@ export function createGitHubBackend({ token, owner = "sulj1237", repo = "PF_priv
       const ref = await gh(`/git/ref/heads/${draft}`, { allow: [404] });
       if (ref.status === 404) {
         const main = await json(`/git/ref/heads/${base}`);
-        await post(`/git/refs`, { ref: `refs/heads/${draft}`, sha: main.object.sha });
+        // 조회가 잠깐 404 를 돌려줘도 이미 있는 브랜치면(422) 그대로 이어서 쓴다
+        await post(`/git/refs`, { ref: `refs/heads/${draft}`, sha: main.object.sha }, [422]);
       } else {
         const c = await json(`/compare/${draft}...${base}`);
         if (c.ahead_by > 0 && c.behind_by === 0) {
